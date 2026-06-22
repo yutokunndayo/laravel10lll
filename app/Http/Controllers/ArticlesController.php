@@ -13,10 +13,10 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-         $articles=Article::all();
-         return $articles;
-        //  $articles=Article::paginate(10);
-        // return view('articleList',compact('articles'));
+        //  $articles=Article::all();
+        //  return $articles;
+          $articles=Article::paginate(10);
+         return view('articleList',compact('articles'));
 
 
     }
@@ -66,7 +66,7 @@ DB::transaction(function () use ($article) {
 
     public function show(string $id)
     {
-        $article_data = Article::find($id);
+   $article_data = Article::findOrFail($id);
 
     return view("articleDetail", compact("article_data"));
 

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Http\JsonResponse;
 class UnescapeJsonResponse
 {
     /**
@@ -21,10 +21,8 @@ class UnescapeJsonResponse
         if (!$response instanceof JsonResponse) {
             return $response;
         }
-        //レスポンスがJsonオブジェクトの場合は、Jsonデータのエンコードオプションを追加して設定し直す
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
 
-        return $response;
+
     }
 
 }

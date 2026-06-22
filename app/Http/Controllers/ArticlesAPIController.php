@@ -27,7 +27,7 @@ class ArticlesAPIController extends Controller
             $data = ArticlesResource::collection($articles);
             $status = Response::HTTP_OK; // 200
         } else {
-            // 3. 失敗時（データが0件の場合）
+
             $data = []; // または課題指定の空データ
             $status = Response::HTTP_NOT_FOUND; // 404
         }
@@ -40,21 +40,24 @@ class ArticlesAPIController extends Controller
      */
     public function show(string $id)
     {
-        //  $article=Article::find($id);
-        //  return new ArticleslesResource($article);
-if ($article) {
-         $article = Article::find($id);
-         $convert = new JsonConvert();
+     $articles= Article::find($id);
 
+    if ($article) {
+        return new ArticleResource($article);
 
-
-             $data = new ArticlesResource($article);
-             $status = Response::HTTP_OK; // 200
-         } else {
-
-             $data = ['message' => 'データがありません']; // 課題の仕様書にある失敗時JSONデータに合わせてください
-             $status = Response::HTTP_NOT_FOUND; // 404
-        }
-         return $convert->toJson($data, $status);
+    }else {
+        return response()->json(
+            [
+                "data" => [
+                    "status" => "error",
+                    "message" => "データが存在しません。"
+                ]
+            ],
+            Response::HTTP_NOT_FOUND,
+            ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+            JSON_UNESCAPED_UNICODE
+        );
     }
-}
+
+    }
+    }
