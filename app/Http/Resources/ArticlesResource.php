@@ -19,7 +19,7 @@ class ArticlesResource extends JsonResource
 'title' => $this-> title,
 'body' => $this -> body,
 'created_at'=>$this -> created_at
-        ]
+        ];
         //return parent::toArray($request);
     }
 }
