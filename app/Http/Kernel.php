@@ -4,12 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\UnescapeJsonResponse::class,//追加したミドルウェアをapiグループに追加
-        ],
+
 
 class Kernel extends HttpKernel
 {
@@ -49,6 +44,10 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+
+            \App\Http\Middleware\UnescapeJsonResponse::class,//追加したミドルウェアをapiグループに追加
+
         ],
     ];
 

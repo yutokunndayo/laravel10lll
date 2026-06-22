@@ -40,21 +40,21 @@ class ArticlesAPIController extends Controller
      */
     public function show(string $id)
     {
-        // 1. idをキーに1件検索
-        $article = Article::find($id);
-        $convert = new JsonConvert();
+        //  $article=Article::find($id);
+        //  return new ArticleslesResource($article);
+if ($article) {
+         $article = Article::find($id);
+         $convert = new JsonConvert();
 
-        // 2. データ取得成功時（データが存在する場合）
-        if ($article) {
-            // 1件のデータにAPIリソースを適用
-            $data = new ArticlesResource($article);
-            $status = Response::HTTP_OK; // 200
-        } else {
-            // 3. 失敗時（データが存在しない場合）
-            $data = ['message' => 'データがありません']; // 課題の仕様書にある失敗時JSONデータに合わせてください
-            $status = Response::HTTP_NOT_FOUND; // 404
+
+
+             $data = new ArticlesResource($article);
+             $status = Response::HTTP_OK; // 200
+         } else {
+
+             $data = ['message' => 'データがありません']; // 課題の仕様書にある失敗時JSONデータに合わせてください
+             $status = Response::HTTP_NOT_FOUND; // 404
         }
-
-        return $convert->toJson($data, $status);
+         return $convert->toJson($data, $status);
     }
 }

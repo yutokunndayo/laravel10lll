@@ -18,7 +18,7 @@ class ArticlesResource extends JsonResource
 "id" => $this-> id,
 'title' => $this-> title,
 'body' => $this -> body,
-'created_at'=>$this -> created_at
+'create_at'=>$this -> create_at
         ];
         //return parent::toArray($request);
     }
