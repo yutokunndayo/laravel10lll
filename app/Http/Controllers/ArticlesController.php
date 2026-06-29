@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
-
+use Illuminate\Spport\Facades\Storage;
 use DB;
 class ArticlesController extends Controller
 {
@@ -96,6 +96,14 @@ DB::transaction(function () use ($article) {
 
         $article->title = $request->title;
         $article->body = $request->body;
+
+if($request->image){
+    $file=$request->file("image");
+    $image=Storage::disk("public")->put("kadai_images",$file);
+    $article->img_path=basename($image);
+}
+
+
 DB::transaction(function () use ($article) {
         $article->save();
 });
